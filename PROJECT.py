@@ -1,20 +1,37 @@
 from tkinter import *
+from tkinter import messagebox
 import json
 import requests
 
 
 wid = Tk()
-
-
 wid.title("Curreny Exchanger")
 wid.resizable(0, 0)
+
+def DETAILS():
+    global choices
+    info_wid=Tk()
+    info_wid.resizable(0,1)
+    info_wid.title("Detailed Information")
+    s=""
+    s+=f"{'Country Name':<35}\t{':' :^2}\t{'Country code':>15}\n"
+    s+="_"*54+"\n"
+    for i in choices:
+        s+=f"{choices[i]:<35}\t{':' :^2}\t{i:>15}\n"
+    T=Text(master=info_wid)
+    T.insert(INSERT, s)
+    T.configure(state='disabled')
+    T.pack(expand=True,fill=BOTH)
+
+    info_wid.mainloop()
+
 
 
 menuBar = Menu(wid)
 MENU1 = Menu(menuBar, tearoff=0)
 menuBar.add_cascade(label='OPTION & HELP', menu=MENU1)
-MENU1.add_command(label='Detailed Information')
-
+MENU1.add_command(label='Detailed Information',command=DETAILS)
+wid.config(menu = menuBar)
 
 amount = StringVar()
 
@@ -31,7 +48,7 @@ final_amt = StringVar()
 final_amt.set("0")
 
 
-with open('/Users/uchitnm/Desktop/data.json', 'r', encoding="utf8") as fileObj:
+with open('data.json', 'r', encoding="utf8") as fileObj:
     choices = json.load(fileObj)
     fileObj.close()
 
