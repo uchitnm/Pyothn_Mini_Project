@@ -27,7 +27,7 @@ def LISTevents():
         for i in rem:
             for j in rem[i]:
                 s += f"{i}:{j}\n"
-        print(s)
+
         op_field.insert(END, s)
         op_field.grid(row=1, column=0, columnspan=3)
     Button(E_Wid, text="Go", command=listing).grid(row=0, column=3)
@@ -57,7 +57,7 @@ def ADDevent(date):
     E_Wid.mainloop()
 
 
-Button(root, text="Add Event", command=lambda: ADDevent(cal.get_date())).pack()
-Button(root, text="List Event", command=LISTevents).pack()
+Button(root, text="Add Event", command=lambda: ADDevent(cal.get_date())).pack(side=LEFT)
+Button(root, text="List Event", command=LISTevents).pack(side=LEFT)
 
 root.mainloop()
